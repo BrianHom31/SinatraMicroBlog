@@ -41,7 +41,9 @@ get '/signin' do
 end
 
 post '/signin' do
-	@user = User.find_by(username: params[:username], password: params[:password])
+	@user = User.find_by(
+	username: params[:username],
+	password: params[:password])
 		if @user && @user.password == params[:password]
 			session[:user_id] = @user.id
 			redirect '/post'
@@ -77,12 +79,22 @@ end
 post '/newpost' do
 	puts params.inspect
 	@user = User.find(session[:user_id])
-	@post = Post.create(user_id: session[:user_id], title: params[:title], content: params[:message], artist: params[:artist], location: params[:location])
+	@post = Post.create(
+	user_id: session[:user_id],
+	title: params[:title],
+	content: params[:message],
+	artist: params[:artist],
+	location: params[:location])
 	redirect "/after_post/#{@post.id}"
 end
 
 post '/after_post' do
-	comment = Comment.create(post_id: params[:post_id], user_id: session[:user_id], content: params[:message], artist: params[:artist], location: params[:location])
+	comment = Comment.create(
+	post_id: params[:post_id],
+	user_id: session[:user_id],
+	content: params[:message],
+	artist: params[:artist],
+	location: params[:location])
 	redirect "/after_post/#{comment.post.id}"
 end
 
@@ -98,8 +110,25 @@ get '/edit_acc' do
 end
 
 post '/update' do
+
+	params.each do |x|
+		puts "Each x in params: ",x
+	end
+
 	@user = User.find(session[:user_id])
-	@user = @user.update(username: params[:username], password: params[:password], email: params[:email], fname: params[:fname], lname: params[:lname], user_location: params[:user_location], fav_genre: params[:fav_genre], fav_artist1: params[:fav_artist1], fav_artist2: params[:fav_artist2], fav_artist3: params[:fav_artist3])
+	puts params.inspect
+	@user = @user.update(
+	username: params[:username],
+	password: params[:password],
+	email: params[:email],
+	fname: params[:fname],
+	lname: params[:lname],
+	user_location: params[:user_location],
+	fav_genre: params[:fav_genre],
+	fav_artist1: params[:fav_artist1],
+	fav_artist2: params[:fav_artist2],
+	fav_artist3: params[:fav_artist3]
+	)
 	redirect '/edit_acc'
 end
 

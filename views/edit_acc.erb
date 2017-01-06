@@ -2,20 +2,17 @@
   <h1 class="heading">Update Your Profile</h1>
 
   <form method="POST" action="/update"> <!-- FORMS -->
-    <label>First Name</label><br/><input type="text" name="fname" placeholder=""><br>
-    <label>Last Name</label><br/><input name="lname" placeholder=""><br>
+    <label>First Name</label><br/><input type="text" name="fname" placeholder="<%= @user.fname %>"><br>
+    <label>Last Name</label><br/><input name="lname" placeholder="<%= @user.lname %>"><br>
     <label>Location</label><br/><input type="user_location" name="user_location" placeholder="Location"><br>
     <label>Favorite Genre</label><br><input type="text" name="fav_genre" placeholder="Genre"><br>
     <label>Favorite Artist 1</label><br><input type="text" name="fav_artist1" placeholder="Artist 1"><br>
     <label>Favorite Artist 2</label><br><input type="text" name="fav_artist2" placeholder="Artist 2"><br>
     <label>Favorite Artist 3</label><br><input type="text" name="fav_artist3" placeholder="Artist 3"><br>
      <!-- bootstrap buttons -->
-  </form>
-
 
   <h1 class="heading">Change Your Login</h1>
 
-  <form method="POST" action="/update"> <!-- FORMS -->
     <label>E-mail</label><br/><input type="email" name="email" placeholder="<%=@user.email%>"><br>
     <label>Username</label><br/><input name="username" placeholder="<%=@user.username%>"><br>
     <label>Password</label><br/><input type="password" name="password" placeholder="New Password"><br><br>
