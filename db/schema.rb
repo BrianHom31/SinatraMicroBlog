@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170106165940) do
+ActiveRecord::Schema.define(version: 20170106191734) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id"
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(version: 20170106165940) do
     t.string "username"
     t.string "password"
     t.string "email"
+    t.string "fname"
+    t.string "lname"
+    t.string "user_location"
+    t.string "fav_genre"
+    t.string "fav_artist1"
+    t.string "fav_artist2"
+    t.string "fav_artist3"
   end
 
 end

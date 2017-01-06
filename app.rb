@@ -19,7 +19,19 @@ get '/signup' do
 end
 
 post '/signup' do
-	@user = User.create(username: params[:username], password: params[:password], email: params[:email])
+	puts params.inspect
+	@user = User.create(
+		username: params[:username],
+		password: params[:password],
+		email: params[:email],
+		fname: params[:fname],
+		lname: params[:lname],
+		user_location: params[:user_location],
+		fav_genre: params[:fav_genre],
+		fav_artist1: params[:fav_artist1],
+		fav_artist2: params[:fav_artist2],
+		fav_artist3: params[:fav_artist3]
+		)
 	session[:user_id] = @user.id
 	redirect '/post'
 end
@@ -31,9 +43,9 @@ end
 post '/signin' do
 	@user = User.find_by(username: params[:username], password: params[:password])
 		if @user && @user.password == params[:password]
-		session[:user_id] = @user.id
-		redirect '/post'
-	else
+			session[:user_id] = @user.id
+			redirect '/post'
+		else
 		redirect '/signup'
 	end
 end
@@ -65,7 +77,7 @@ end
 post '/newpost' do
 	puts params.inspect
 	@user = User.find(session[:user_id])
-	@post = Post.create(user_id: session[:user_id], title: params[:title], content: params[:message])
+	@post = Post.create(user_id: session[:user_id], title: params[:title], content: params[:message], artist: params[:artist], location: params[:location])
 	redirect "/after_post/#{@post.id}"
 end
 
@@ -87,7 +99,7 @@ end
 
 post '/update' do
 	@user = User.find(session[:user_id])
-	@user = @user.update(username: params[:username], password: params[:password], email: params[:email])
+	@user = @user.update(username: params[:username], password: params[:password], email: params[:email], fname: params[:fname], lname: params[:lname], user_location: params[:user_location], fav_genre: params[:fav_genre], fav_artist1: params[:fav_artist1], fav_artist2: params[:fav_artist2], fav_artist3: params[:fav_artist3])
 	redirect '/edit_acc'
 end
 
