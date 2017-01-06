@@ -63,13 +63,14 @@ get '/newpost' do
 end
 
 post '/newpost' do
+	puts params.inspect
 	@user = User.find(session[:user_id])
-	post = Post.create(user_id: session[:user_id], title: params[:title], content: params[:message])
-	redirect "/after_post/#{post.id}"
+	@post = Post.create(user_id: session[:user_id], title: params[:title], content: params[:message])
+	redirect "/after_post/#{@post.id}"
 end
 
 post '/after_post' do
-	comment = Comment.create(post_id: params[:post_id], user_id: session[:user_id], content: params[:message])
+	comment = Comment.create(post_id: params[:post_id], user_id: session[:user_id], content: params[:message], artist: params[:artist], location: params[:location])
 	redirect "/after_post/#{comment.post.id}"
 end
 

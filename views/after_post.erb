@@ -6,6 +6,14 @@
 		<a href="/user/<%= @post.user.id %>"> <%= @post.user.username %></a>
 	</div>
 
+  <div class="text-center post">
+    <%= @post.artist %>
+  </div>
+
+  <div class="text-center post">
+    <%= @post.location %>
+  </div>
+
 <!-- append content below the user who  posted the blog -->
   <div class="text-center post-content">
 		<%= @post.content %>
