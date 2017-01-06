@@ -1,0 +1,13 @@
+<h1 class="heading">Info About The Blogger:</h1><br/>
+
+<div class="User_info">
+	<h2 class="info">Username: <%= @view_user.username %>
+		<br><br>E-mail: <%= @view_user.email %>
+	</h2>
+</div>
+
+<div class="User_info">
+	<h3>[Recent Posts]:</h3>
+	<a href="/after_post/<%= @view_post.id %>">
+  <h2 class="post-info"><%= @view_post.title %></h2></a>
+</div>

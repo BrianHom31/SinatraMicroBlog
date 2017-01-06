@@ -1,3 +1,4 @@
+source "http://rubygems.org"
 
 # the AR library
 gem 'activerecord'

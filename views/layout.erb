@@ -1,23 +1,40 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Sinatra Micro Blog</title>
-  </head>
-  <body>
-    <h1>Sinatra MicroBlog</h1>
+<head>
+  <meta charset="UTF-8">
+  <title>Sinatra MicroBlog</title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/jit.css">
+  <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+</head>
 
-  <nav>
-    <ul>
-      <li><a href="">Sign In</li>
-      <li><a href="">Sign Out</li>
-      <li><a href="">Edit Account</li>
-    </ul>
-  </nav>
+<body class="main">
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="/">MicroBlog</a>
 
-    <%= yield %>
+	      <% if @user %>
+	      <a href="/post"><button type="button" class="btn btn-default navbar-btn pull-left">Blogs</button></a>
+	      <a href="/edit_acc"><button type="button" class="btn btn-default navbar-btn pull-left">Profile</button></a>
+	      <% end %>
+	    </div>
 
-  <footer></footer>
+  	  	<% if @user %>
+  	    <a href="/signout"><button type="button" class="btn btn-default navbar-btn pull-right">Sign out</button></a>
+  	    <% else %>
+  	    <a href="/signin"><button type="button" class="btn btn-default navbar-btn pull-right">Sign in</button></a>
+  	    <a href="/signup"><button type="button" class="btn btn-default navbar-btn pull-right">Sign up</button></a>
+  	  	<% end %>
+  	    <p class="navbar-text pull-right"><%= "Welcome Back, #{@user.username} !" if @user %> </p>
+	  </div>
+	</nav>
 
-  </body>
+</body>
 </html>
+<%= yield %>
+
+<center><div>
+<footer>&copy; MicroBlog 2017</footer>
+<footer>Copyright (c) 2016 Copyright Holder All Rights Reserved.</footer>
+</div>

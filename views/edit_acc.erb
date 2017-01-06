@@ -1,0 +1,12 @@
+<div class="col-sm-12 text-center">  <!-- align text center -->
+  <h1 class="heading">Update your account</h1>
+
+  <form method="POST" action="/update"> <!-- FORMS -->
+    <label>E-mail</label><br/><input type="email" name="email" placeholder="<%=@user.email%>"><br>
+    <label>Username</label><br/><input name="username" placeholder="<%=@user.username%>"><br>
+    <label>Password</label><br/><input type="password" name="password" placeholder="New Password"><br><br>
+    <input class="btn btn-primary" type="submit" value="Update"> <!-- bootstrap buttons -->
+    <a href="/delete_account"><button type="button" class="btn btn-danger">Delete account</button></a>
+  </form>
+  <br>
+</div>

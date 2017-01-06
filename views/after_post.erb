@@ -1,0 +1,13 @@
+<h1 class="heading">
+  <%= @post.title if @post.title %></h1><br>
+
+<div class="row">
+	<div class="text-center post">  <!-- align text center -->
+		<a href="/user/<%= @post.user.id %>"> <%= @post.user.username %></a>
+	</div>
+
+<!-- append content below the user who  posted the blog -->
+  <div class="text-center post-content">
+		<%= @post.content %>
+	</div>
+</div>
