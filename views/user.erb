@@ -1,7 +1,7 @@
-<h1 class="heading">Info About The Blogger:</h1><br/>
+<h1 class="heading"><%= @user.username %>'s Info:</h1>
 
 <div class="User_info">
-	<h2 class="info">Username: <%= @view_user.username %>
+	<h2 class="info">
 		<br><br>First Name: <%= @view_user.fname %>
 		<br><br>Last Name: <%= @view_user.lname %>
 		<br><br>Location: <%= @view_user.user_location %>
@@ -12,8 +12,11 @@
 	</h2>
 </div>
 
-<div class="User_info">
-	<h3>[Recent Posts]:</h3>
-	<a href="/after_post/<%= @view_post.id %>">
-  <h2 class="post-info"><%= @view_post.title %></h2></a>
-</div>
+
+
+<ol class="text-center">
+	<% @view_user.posts.each do |post| %>
+		<h3><a href="/after_post/<%= post.id %>"><li><%= post.title %><br><a class="post" href="/user/<%= post.user.id if post.user %>"><%= post.user.username if post.user %></a></li></a></h3>
+		<hr>
+	<% end %>
+</ol><br>

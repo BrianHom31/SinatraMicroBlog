@@ -62,6 +62,7 @@ get '/user/:id' do
   @view_user = User.find(params[:id])
   @view_post = Post.find(params[:id])
   @user = User.find(session[:user_id])
+	@post = Post.all
   erb :user
 end
 
@@ -104,6 +105,27 @@ get '/post' do
   erb :post
 end
 
+get '/edit_post' do
+	@user = User.find(session[:user_id])
+	@post = Post.find(params[:id])
+	erb :edit_post
+end
+
+post '/edit_post' do
+	@user = User.find(session[:user_id])
+	@post = Post.find(params[:id])
+	@post = Post.create(
+	user_id: session[:user_id],
+	title: params[:title],
+	content: params[:message],
+	artist: params[:artist],
+	location: params[:location])
+
+	erb :edit_post
+
+	redirect '/post'
+end
+
 get '/edit_acc' do
 	@user = User.find(session[:user_id])
 	erb :edit_acc
@@ -117,23 +139,41 @@ post '/update' do
 
 	@user = User.find(session[:user_id])
 	puts params.inspect
-	@user = @user.update(
-	username: params[:username],
-	password: params[:password],
-	email: params[:email],
-	fname: params[:fname],
-	lname: params[:lname],
-	user_location: params[:user_location],
-	fav_genre: params[:fav_genre],
-	fav_artist1: params[:fav_artist1],
-	fav_artist2: params[:fav_artist2],
-	fav_artist3: params[:fav_artist3]
-	)
+
+	#loops over the keys of each parameter, where x is the key. if the parameter of the key is NOT an empty string, update the value of the key. The empty fields are not updated as empty strings. Thanks, Fizel :)  (and Dan...and Liza...)
+	params.keys.each do |x|
+		if (params[x] != "")
+			puts x, params[x]
+			@user.update(x => params[x])
+		end
+	end
+
+	#The long, incorrect way.
+	# @user = @user.update(
+	# username: params[:username],
+	# password: params[:password],
+	# email: params[:email],
+	# fname: params[:fname],
+	# lname: params[:lname],
+	# user_location: params[:user_location],
+	# fav_genre: params[:fav_genre],
+	# fav_artist1: params[:fav_artist1],
+	# fav_artist2: params[:fav_artist2],
+	# fav_artist3: params[:fav_artist3]
+	# )
+
 	redirect '/edit_acc'
+
 end
 
 get "/delete_account" do
   @user = User.find(session[:user_id])
   User.find(@user).destroy
   redirect '/'
+end
+
+get '/delete_post' do
+	@post = Post.find(params[:id])
+	Post.find(@post).destroy
+	redirect '/user'
 end
