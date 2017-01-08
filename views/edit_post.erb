@@ -1,7 +1,7 @@
 <h1 class="heading">Edit your review!</h1><br/>
 
 <div class="col-sm-12 text-center">  <!-- align text center -->
-  <form method="POST" action="/newpost">
+  <form method="POST" action="/update_post">
 		<label>Review Title: <input type="text" name="title" placeholder="<%= @post.title %>"></label><br><br>
     <label>Artist: <input type="text" name="artist" placeholder="<%= @post.artist %>"></label><br><br>
     <label>Event Location: <input type="text" name="location" placeholder="<%= @post.location %>"></label><br><br>
@@ -10,6 +10,6 @@
   	<strong><span id="message-remaining"></span></strong><br>
   	<input class="btn btn-default" type="submit">
 
-<center><a href="/edit_post"><button type="button" class="btn btn-default navbar-btn">Delete Post</button></a>
+<center><a href="/update_post"><button type="button" class="btn btn-default navbar-btn">Delete Post</button></a>
   </form>
 </div>

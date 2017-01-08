@@ -111,7 +111,7 @@ get '/edit_post' do
 	erb :edit_post
 end
 
-post '/edit_post' do
+post '/update_post' do
 	@user = User.find(session[:user_id])
 	@post = Post.find(params[:id])
 	@post = Post.create(
@@ -120,8 +120,6 @@ post '/edit_post' do
 	content: params[:message],
 	artist: params[:artist],
 	location: params[:location])
-
-	erb :edit_post
 
 	redirect '/post'
 end
