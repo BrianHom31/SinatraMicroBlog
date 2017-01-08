@@ -1,13 +1,14 @@
 <h1 class="heading">Love live music? Did it Rock? Did it Flop? Post your review!</h1><br>
 
 
+<a href="/newpost"><input class="btn btn-warning" type="submit" value="Start A New Post"></a><br><br>
 
 
 <h2 class="heading">Review Feed:</h2>
 
 <ol class="text-center">  <!-- align text center -->
 	<% @posts.each do |post| %>
-		<a href="/after_post/<%= post.id %>"><li><%= post.title %><br><a class="post" href="/user/<%= post.user.id if post.user %>"><%= post.user.username if post.user %></a></li></a>
+		<h3><a href="/after_post/<%= post.id %>"><li><%= post.title %><br><a class="post" href="/user/<%= post.user.id if post.user %>"><%= post.user.username if post.user %></a></li></a></h3>
+		<hr>
 	<% end %>
 </ol><br>
-<a href="/newpost"><input class="btn btn-warning" type="submit" value="Start A New Post"></a><br><br>
