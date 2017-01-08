@@ -8,8 +8,12 @@ body {
 }
 
 .navbar {
-  background-color: red;
+  background-color: lightgray;
 }
 h1 {
   text-align: center;
+}
+
+.bgbox {
+  color: lightgray;
 }
