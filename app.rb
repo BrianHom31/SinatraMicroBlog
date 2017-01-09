@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'sinatra/activerecord'
-require 'sqlite3'
 require './models'
 
 enable :sessions
