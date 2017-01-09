@@ -96,6 +96,9 @@ post '/newpost' do
 	content: params[:message],
 	artist: params[:artist],
 	location: params[:location])
+
+	params[:post_id] = @post.id
+
 	redirect "/after_post/#{@post.id}"
 end
 
@@ -206,11 +209,12 @@ get "/delete_account" do
 end
 
 ##################################
-get '/delete_post' do
-	# @post = Post.find(params[:post_id])
-	# establish post_id
-	@post = Post.find(session[:user_id])
+get '/delete_post/:id' do
+	# puts params
+	@post = Post.find_by_id(params["id"])
+	# puts "delete route", @post
+	# @post = Post.find(session[:user_id])
 
-	Post.find(@post).delete
+	Post.find(@post).destroy
 	redirect '/post'
 end
