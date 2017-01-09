@@ -5,11 +5,10 @@ require './models'
 
 enable :sessions
 set :sessions => true
-set :database, 'sqlite3:blog.sqlite3'
 
 # For Heroku
 configure(:development) do
-  set :database, "sqlite3:database_name.sqlite3"
+	set :database, 'sqlite3:blog.sqlite3'
 end
 
 ########### ROUTES #############
