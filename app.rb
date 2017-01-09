@@ -65,17 +65,27 @@ end
 
 ##################################
 get '/user/:id' do
-  @view_user = User.find(params[:id])
-  @view_post = Post.find(params[:id])
-  @user = User.find(session[:user_id])
-	@post = Post.all
+
+	@user = User.find(params[:id])
+	puts "THIS IS THE USER:", @user.inspect
+
+	@all_posts_by_user = @user.posts
+	puts "ALL POSTS BY THIS USER:", @all_posts_by_user.inspect
+
+
+  # @view_user = User.find(params[:id])
+  # @view_post = Post.where(:user_id => params[:id])
+	#
+	# # find all posts where user_id = id
+	#
+  # @user = User.find(session[:user_id])
+	# @post = Post.all
   erb :user
 end
 
 ##################################
 get '/after_post/:id' do
 	@user = User.find(session[:user_id])
-
   @post = Post.find(params[:id])
   erb :after_post
 end
@@ -121,19 +131,33 @@ get '/post' do
 end
 
 ##################################
-get '/edit_post' do
+get '/edit_post/:id' do
 	@user = User.find(session[:user_id])
 	# @post = Post.find(params[:id])
-	@post = Post.find(session[:user_id])
+	@post = Post.find_by_id(params["id"])
 	erb :edit_post
 end
 
 ##################################
-post '/update_post' do
+post '/update_post/:post_id' do
 	@user = User.find(session[:user_id])
-	# @post = Post.find(params[:id])
-	@post = Post.find(session[:user_id])
+	@post = Post.find(params[:post_id])
 
+	if params[:content] != ""
+		@post.update(content: params[:content])
+	end
+
+	if params[:title] != ""
+		@post.update(title: params[:title])
+	end
+
+	if params[:artist] != ""
+		@post.update(artist: params[:artist])
+	end
+
+	if params[:location] != ""
+		@post.update(location: params[:location])
+	end
 	# @post = Post.create(
 	# user_id: session[:user_id],
 	# title: params[:title],
@@ -147,12 +171,28 @@ post '/update_post' do
 	# artist: params[:artist],
 	# location: params[:location])
 
+	puts params
 
-	params.keys.each do |x|
-		if (params[x] != "")
-			@post.update(x => params[x])
-	end
-end
+	# params.each do |key, value|
+	#   puts "THIS IS THE KEY:", key
+	#   puts "THIS IS THE VAL:", value
+	#
+	# 	# if value does not eq empty string
+	# 		# update that key with the new val
+	# 	# else
+	# 		# do nothing
+	#
+	# 	if params
+	# 		@post.update(key: params[:value])
+	# 	end
+	# end
+
+
+	# params.keys.each do |x|
+	# 	if (params[x] != "")
+	# 		@post.update(x => params[x])
+	# 	end
+	# end
 
 	redirect '/post'
 end

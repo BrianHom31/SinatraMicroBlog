@@ -1,6 +1,6 @@
 body {
   background-color: lightgray;
-  /*background-image: url("giphy.gif");*/
+  background-image: url('/Live-music.jpg');
   background-color: black;
   background-repeat: no-repeat;
   background-size: cover;
@@ -8,26 +8,61 @@ body {
   /*color: black;*/
 }
 
+.homediv1 {
+  background-color: black;
+  opacity: 0.6;
+  padding: 20px;
+  line-height: 40px;
+  border-radius: 50px 50px 50px 50px;
+}
+.heading {
+  color: aqua;
+  font-weight: bold;
+  border-radius: 50px 50px 50px 50px;
+}
 
 .navbar {
   background-color: lightgray;
+  color: black;
+}
+
+.navbar a {
+  font-size: 30px;
+  font-family: sans-serif;
 }
 
 
 h1 {
+  background-color: black;
   text-align: center;
+  color: white;
+  opacity: 0.6;
 
 }
 
 .bgbox {
   /*color: lightgray;*/
   color: brown;
+  background-color: black;
+  opacity: 0.6;
+  border-radius: 50px 50px 50px 50px;
+
 }
 
 .info {
-  color: brown;
+  background-color: black;
+  opacity: 0.6;
+  color: lightblue;
 }
 
 .values {
   color: white;
+}
+
+.list-number {
+  list-style-type: none;
+}
+
+.new-post-btn {
+  font-size: 30px;
 }

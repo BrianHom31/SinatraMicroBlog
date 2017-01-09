@@ -1,16 +1,17 @@
 <h1 class="heading">Love live music? Did it Rock? Did it Flop? Post your review!</h1><br>
 
 
-<a href="/newpost"><input class="btn btn-warning" type="submit" value="Start A New Post"></a><br><br>
+<a href="/newpost"><input class="btn btn-warning new-post-btn" type="submit" value="Start A New Post"></a><br><br>
 
 
 <h2 class="heading">Review Feed:</h2>
 
-<ol class="text-center">  <!-- align text center -->
-	<% @posts.each do |post| %>
+<ol class="text-center list-number">  <!-- align text center -->
+	<% puts @posts.inspect %>
+	<% @posts.reverse.each do |post| %>
 		<a href="/after_post/<%= post.id %>">
 			<li><h3><%= post.title %></h3>
-			<h4><a class="post" href="/user/<%= post.user.id if post.user %>"><%= post.user.username if post.user %></a></li></a></h4>
+			<h5><a class="post" href="/user/<%= post.user.id if post.user %>">Posted By: <%= post.user.username if post.user %></a></li></a></h5>
 		<hr>
 	<% end %>
 </ol><br>
