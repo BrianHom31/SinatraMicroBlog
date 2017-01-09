@@ -7,6 +7,7 @@ enable :sessions
 set :sessions => true
 set :database, 'sqlite3:blog.sqlite3'
 
+########### ROUTES #############
 get '/' do
 	if session[:user_id]
 		@user = User.find(session[:user_id]) if @user
@@ -14,10 +15,12 @@ get '/' do
 	erb :home
 end
 
+##################################
 get '/signup' do
 	erb :signup
 end
 
+##################################
 post '/signup' do
 	puts params.inspect
 	@user = User.create(
@@ -36,6 +39,7 @@ post '/signup' do
 	redirect '/post'
 end
 
+##################################
 get '/signin' do
 	erb :signin
 end
@@ -52,12 +56,14 @@ post '/signin' do
 	end
 end
 
+##################################
 get "/signout" do
 @session = session
 @session.destroy
   redirect '/'
 end
 
+##################################
 get '/user/:id' do
   @view_user = User.find(params[:id])
   @view_post = Post.find(params[:id])
@@ -66,17 +72,21 @@ get '/user/:id' do
   erb :user
 end
 
+##################################
 get '/after_post/:id' do
 	@user = User.find(session[:user_id])
+
   @post = Post.find(params[:id])
   erb :after_post
 end
 
+##################################
 get '/newpost' do
 	@user = User.find(session[:user_id])
 	erb :newpost
 end
 
+########
 post '/newpost' do
 	puts params.inspect
 	@user = User.find(session[:user_id])
@@ -89,6 +99,7 @@ post '/newpost' do
 	redirect "/after_post/#{@post.id}"
 end
 
+##################################
 post '/after_post' do
 	comment = Comment.create(
 	post_id: params[:post_id],
@@ -99,36 +110,57 @@ post '/after_post' do
 	redirect "/after_post/#{comment.post.id}"
 end
 
+##################################
 get '/post' do
   @posts = Post.all
   @user = User.find(session[:user_id])
   erb :post
 end
 
+##################################
 get '/edit_post' do
 	@user = User.find(session[:user_id])
-	@post = Post.find(params[:id])
+	# @post = Post.find(params[:id])
+	@post = Post.find(session[:user_id])
 	erb :edit_post
 end
 
+##################################
 post '/update_post' do
 	@user = User.find(session[:user_id])
-	@post = Post.find(params[:id])
-	@post = Post.create(
-	user_id: session[:user_id],
-	title: params[:title],
-	content: params[:message],
-	artist: params[:artist],
-	location: params[:location])
+	# @post = Post.find(params[:id])
+	@post = Post.find(session[:user_id])
+
+	# @post = Post.create(
+	# user_id: session[:user_id],
+	# title: params[:title],
+	# content: params[:message],
+	# artist: params[:artist],
+	# location: params[:location])
+	# @update_post = Post.update(
+	# user_id: session[:user_id],
+	# title: params[:title],
+	# content: params[:message],
+	# artist: params[:artist],
+	# location: params[:location])
+
+
+	params.keys.each do |x|
+		if (params[x] != "")
+			@post.update(x => params[x])
+	end
+end
 
 	redirect '/post'
 end
 
+##################################
 get '/edit_acc' do
 	@user = User.find(session[:user_id])
 	erb :edit_acc
 end
 
+##################################
 post '/update' do
 
 	params.each do |x|
@@ -164,14 +196,18 @@ post '/update' do
 
 end
 
+##################################
 get "/delete_account" do
   @user = User.find(session[:user_id])
   User.find(@user).destroy
   redirect '/'
 end
 
+##################################
 get '/delete_post' do
-	@post = Post.find(params[:id])
-	Post.find(@post).destroy
-	redirect '/user'
+	# @post = Post.find(params[:id])
+	@post = Post.find(session[:id])
+
+	Post.find(@post).delete
+	redirect '/post'
 end

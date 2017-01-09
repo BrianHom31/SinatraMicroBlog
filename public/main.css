@@ -1,19 +1,25 @@
 body {
   background-color: lightgray;
-  background-image: url("giphy.gif");
+  /*background-image: url("giphy.gif");*/
+  background-color: black;
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
-
+  /*color: black;*/
 }
+
 
 .navbar {
   background-color: lightgray;
 }
+
+
 h1 {
   text-align: center;
+
 }
 
 .bgbox {
-  color: lightgray;
+  /*color: lightgray;*/
+  color: brown;
 }

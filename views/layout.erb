@@ -26,7 +26,7 @@
   	    <a href="/signin"><button type="button" class="btn btn-default navbar-btn pull-right">Sign in</button></a>
   	    <a href="/signup"><button type="button" class="btn btn-default navbar-btn pull-right">Sign up</button></a>
   	  	<% end %>
-  	    <p class="navbar-text pull-right"><%= "Welcome Back, #{@user.username} !" if @user %> </p>
+  	    <p class="navbar-text pull-right"><%= "Welcome Back, #{@user.username.capitalize} !" if @user %> </p>
 	  </div>
 	</nav>
 

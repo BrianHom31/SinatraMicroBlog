@@ -1,22 +1,23 @@
-<h1 class="heading"><%= @user.username %>'s Info:</h1>
+<h1 class="heading"><%= @user.username.capitalize %>'s Info:</h1>
 
 <div class="User_info">
-	<h2 class="info">
-		<br><br>First Name: <%= @view_user.fname %>
-		<br><br>Last Name: <%= @view_user.lname %>
-		<br><br>Location: <%= @view_user.user_location %>
-		<br><br>Favorite Genre: <%= @view_user.fav_genre %>
-		<br><br>Favorite Artist 1: <%= @view_user.fav_artist1 %>
-		<br><br>Favorite Artist 2: <%= @view_user.fav_artist2 %>
-		<br><br>Favorite Artist 3: <%= @view_user.fav_artist3 %>
-	</h2>
-</div>
+	<h4 class="info">
+	First Name: <%= @view_user.fname %><br><br>
+	Last Name: <%= @view_user.lname %><br><br>
+	Location: <%= @view_user.user_location %><br><br>
+	Favorite Genre: <%= @view_user.fav_genre %><br><br>
+	Favorite Artist 1: <%= @view_user.fav_artist1 %><br><br>
+	Favorite Artist 2: <%= @view_user.fav_artist2 %><br><br>
+	Favorite Artist 3: <%= @view_user.fav_artist3 %><br><br>
+</h4>
+</div><hr>
 
 
-
-<ol class="text-center">
+<h2>[ <%= @user.username.capitalize %>'s' Posts ]:</h2>
+<ol class="">
 	<% @view_user.posts.each do |post| %>
-		<h3><a href="/after_post/<%= post.id %>"><li><%= post.title %><br><a class="post" href="/user/<%= post.user.id if post.user %>"><%= post.user.username if post.user %></a></li></a></h3>
+		<a href="/after_post/<%= post.id %>"><li><h3><%= post.title %></h3>
+			<h4><a class="post" href="/user/<%= post.user.id if post.user %>"><%= post.user.username if post.user %></a></li></a></h4>
 		<hr>
 	<% end %>
 </ol><br>
