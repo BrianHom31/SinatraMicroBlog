@@ -200,13 +200,16 @@ end
 get "/delete_account" do
   @user = User.find(session[:user_id])
   User.find(@user).destroy
+
+	# User.destroy(session[:user_id])
   redirect '/'
 end
 
 ##################################
 get '/delete_post' do
-	# @post = Post.find(params[:id])
-	@post = Post.find(session[:id])
+	# @post = Post.find(params[:post_id])
+	# establish post_id
+	@post = Post.find(session[:user_id])
 
 	Post.find(@post).delete
 	redirect '/post'
